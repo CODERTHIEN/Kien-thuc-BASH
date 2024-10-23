@@ -168,8 +168,36 @@ Step 2: sudo apt install apache2 \
                         php-xml \
                         php-zip
 
+Step 3: sudo mkdir -p /srv/www
 
+Step 4: sudo chown www-data: /srv/www
 
+step 5: curl https://wordpress.org/latest.tar.gz | sudo -u www-data tar zx -C /srv/www  
+
+        * Nếu không cài được thì hãy cài sudo snap install curl >> Rồi sau đó cài lại là dược
+
+Step 6: sudo nano /etc/apache2/sites-available/wordpress.conf
+
+Step 7: Dán vào đoạn code này:
+<VirtualHost *:80>
+ DocumentRoot /srv/www/wordpress
+ <Directory /srv/www/wordpress>
+ Options FollowSymLinks
+ AllowOverride Limit Options FileInfo
+ DirectoryIndex index.php
+ Require all granted
+ </Directory>
+ <Directory /srv/www/wordpress/wp-content>
+ Options FollowSymLinks
+ Require all granted
+ </Directory>
+</VirtualHost>
+
+Step 8: sudo a2ensite wordpress
+
+Step 9: sudo a2enmod rewrite
+
+Step 10: 
 
 
 
